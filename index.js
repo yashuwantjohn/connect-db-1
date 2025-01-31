@@ -1,8 +1,18 @@
 const express = require('express');
 const { resolve } = require('path');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 const port = 3010;
+
+mongoose.connect(process.env.MONGO_URL)
+  .then(()=>{
+    console.log('connected to database');
+  })
+  .catch((err)=>{
+    console.log('error connecting to database', err);
+  })
 
 app.use(express.static('static'));
 
